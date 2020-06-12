@@ -8,7 +8,7 @@ from PIL import Image
 from io import BytesIO
 from dotenv import load_dotenv
 
-from brain import analyze
+from Brain import Brain
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -45,10 +45,11 @@ async def on_message(context):
     image_format_jpeg = image_url[-4:]
     if image_format_jpg.lower() == 'jpg' or image_format_jpeg.lower() == 'jpeg':
         try:
-            result_from_brain = analyze(image_url)[0]
+            brain = Brain()
+            results = brain.analyze_image(image_url)[0]
             message = discord.Embed(
                 title="Let's have a look..")
-            for statistic in result_from_brain:
+            for statistic in results:
                 name = statistic[1]
                 value = f'{round(statistic[2] * 100, 2)} %'
                 message.add_field(name=name, value=value, inline=False)
