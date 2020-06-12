@@ -8,7 +8,7 @@ from PIL import Image
 from io import BytesIO
 from dotenv import load_dotenv
 
-from Brain import Brain
+from brain import Brain
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
